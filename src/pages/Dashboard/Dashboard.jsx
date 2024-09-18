@@ -1,7 +1,6 @@
 import { useState } from "react"; // Tailwind-compatible icons
 import AvatarImages from "../../components/dashboard/AvatarImages/AvatarImages";
 import SettingsMenu from "../../components/dashboard/Settings/Settings";
-import Sales from "../../components/dashboard/Sales/Sales";
 import { MdDashboard } from "react-icons/md";
 import { GrResume } from "react-icons/gr";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -9,6 +8,7 @@ import { TbArrowRoundaboutRight } from "react-icons/tb";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { RiMenuFold3Line2 } from "react-icons/ri";
 import { RiMenuFold4Line } from "react-icons/ri";
+import DashboardContent from "../DashboardContent/DashboardContent";
 
 const iconMap = {
   Dashboard: <MdDashboard size={20} />,
@@ -40,13 +40,13 @@ const Dashboard = () => {
   const renderContent = () => {
     switch (selectedTab) {
       case "Dashboard":
-        return <Sales />;
+        return <DashboardContent />;
       case "See Resume":
-        return <p>Resume Content</p>;
+        return <DashboardContent />;
       case "Change password":
-        return <p>Forms Content</p>;
+        return <DashboardContent />;
       case "About Us":
-        return <p>Tables Content</p>; 
+        return <DashboardContent />;
       default:
         return <p>Select a tab</p>;
     }
@@ -57,14 +57,18 @@ const Dashboard = () => {
       {/* Sidebar */}
       <aside
         className={`bg-white transition-all duration-300 ${
-          open ? "w-60" : "w-20"
+          open ? "w-96" : "w-20"
         } h-screen`}
       >
         {/* Drawer header */}
-        { open ? <div className="flex items-center justify-start gap-6 p-4">
+        {open ? (
+          <div className="flex items-center justify-start gap-6 p-4">
             <p className="text-gray-500 text-2xl italic ml-1">HireHub</p>
-        </div> : '' }
-        
+          </div>
+        ) : (
+          ""
+        )}
+
         {/* List */}
         <ul className="p-4">
           {[
@@ -97,14 +101,18 @@ const Dashboard = () => {
       </aside>
 
       {/* Main content */}
-      <main className="flex-grow p-0 bg-gray-100">
+      <main className="p-0 bg-gray-100">
         <header className="flex justify-between items-center h-[61px] w-full bg-white">
           <div className="flex items-center justify-start h-[61px]">
             <button
               onClick={open ? handleDrawerClose : handleDrawerOpen}
-              className="text-gray-500 border-2 p-2"
+              className="text-gray-500 border-2 p-2 animation-scale-up rounded-sm"
             >
-              {open ? <RiMenuFold3Line2 size={20} /> : <RiMenuFold4Line size={20} />}
+              {open ? (
+                <RiMenuFold3Line2 size={20} />
+              ) : (
+                <RiMenuFold4Line size={20} />
+              )}
             </button>
           </div>
           <div className="flex items-center justify-between gap-5 mr-5 h-[61px]">

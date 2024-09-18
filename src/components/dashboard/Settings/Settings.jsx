@@ -37,7 +37,7 @@ const SettingsMenu = () => {
                   <button
                     className={`${
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                    } block px-4 py-2 text-sm w-full text-left`}
+                    } block px-4 py-2 text-sm w-full text-left hover:text-cyan-300`}
                     onClick={handleClick}
                   >
                     Profile
@@ -49,7 +49,7 @@ const SettingsMenu = () => {
                   <button
                     className={`${
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                    } block px-4 py-2 text-sm w-full text-left`}
+                    } block px-4 py-2 text-sm w-full text-left hover:text-cyan-300`}
                     onClick={handleClick}
                   >
                     My Account
@@ -61,7 +61,7 @@ const SettingsMenu = () => {
                   <button
                     className={`${
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                    } block px-4 py-2 text-sm w-full text-left`}
+                    } block px-4 py-2 text-sm w-full text-left hover:text-cyan-300`}
                     onClick={handleClick}
                   >
                     Logout
