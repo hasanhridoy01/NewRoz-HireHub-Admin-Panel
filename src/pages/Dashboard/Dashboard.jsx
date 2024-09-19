@@ -122,7 +122,7 @@ const Dashboard = () => {
         </header>
 
         {/* Page content */}
-        <div className="p-10">{renderContent()}</div>
+        <div className="p-10 pt-0">{renderContent()}</div>
       </main>
     </div>
   );
