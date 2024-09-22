@@ -112,3 +112,6 @@
 .color-animate-date {
   animation: colorChange 3s infinite; /* Animation duration and infinite loop */
 }
+.stepperDiv .step {
+  cursor: no-drop !important;
+}

@@ -1,4 +1,4 @@
-import { useState } from "react"; // Tailwind-compatible icons
+import { useState } from "react";
 import AvatarImages from "../../components/dashboard/AvatarImages/AvatarImages";
 import SettingsMenu from "../../components/dashboard/Settings/Settings";
 import { MdDashboard } from "react-icons/md";
@@ -6,50 +6,35 @@ import { GrResume } from "react-icons/gr";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { TbArrowRoundaboutRight } from "react-icons/tb";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import { RiMenuFold3Line2 } from "react-icons/ri";
-import { RiMenuFold4Line } from "react-icons/ri";
+import { RiMenuFold3Line2, RiMenuFold4Line } from "react-icons/ri";
 import DashboardContent from "../DashboardContent/DashboardContent";
-
-const iconMap = {
-  Dashboard: <MdDashboard size={20} />,
-  "See Resume": <GrResume size={20} />,
-  "Change password": <RiLockPasswordLine size={20} />,
-  "About Us": <TbArrowRoundaboutRight size={20} />,
-  Logout: <RiLogoutBoxRLine size={20} />,
-};
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
   const [selectedTab, setSelectedTab] = useState("Dashboard");
+  const [key, setKey] = useState(0); // Add a key state to force re-render
 
-  const handleDrawerOpen = () => setOpen(true);
-  const handleDrawerClose = () => setOpen(false);
+  const handleDrawerToggle = () => setOpen(!open);
 
-  // Flag section
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState("FR");
-
-  const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
-  const handleSelect = (countryCode) => {
-    setSelectedCountry(countryCode);
-    handleClose();
+  const handleNavigate = () => {
+    // Logic to navigate or reload, if necessary
   };
 
-  // Render content based on selectedTab
+  const handleDashboardClick = () => {
+    setSelectedTab("Dashboard");
+    setKey((prevKey) => prevKey + 1); // Update key to trigger re-render
+    handleNavigate();
+  };
+
   const renderContent = () => {
-    switch (selectedTab) {
-      case "Dashboard":
-        return <DashboardContent />;
-      case "See Resume":
-        return <DashboardContent />;
-      case "Change password":
-        return <DashboardContent />;
-      case "About Us":
-        return <DashboardContent />;
-      default:
-        return <p>Select a tab</p>;
+    if (
+      ["Dashboard", "See Resume", "Change password", "About Us"].includes(
+        selectedTab
+      )
+    ) {
+      return <DashboardContent key={key} />; // Pass the key to force re-render
     }
+    return <p>Select a tab</p>;
   };
 
   return (
@@ -57,72 +42,135 @@ const Dashboard = () => {
       {/* Sidebar */}
       <aside
         className={`bg-white transition-all duration-300 ${
-          open ? "w-96" : "w-20"
-        } h-screen`}
+          open ? "w-80" : "w-20"
+        } fixed left-0 top-0 z-50 h-full`}
       >
-        {/* Drawer header */}
-        {open ? (
+        {open && (
           <div className="flex items-center justify-start gap-6 p-4">
             <p className="text-gray-500 text-2xl italic ml-1">HireHub</p>
           </div>
-        ) : (
-          ""
         )}
-
         {/* List */}
         <ul className="p-4">
-          {[
-            "Dashboard",
-            "See Resume",
-            "Change password",
-            "About Us",
-            "Logout",
-          ].map((text) => (
-            <li key={text} className="mb-4">
-              <button
-                onClick={() => setSelectedTab(text)}
-                className={`flex items-center ${
-                  open ? "justify-start" : "justify-center"
-                } w-full text-left p-2 rounded ${
-                  selectedTab === text
-                    ? "bg-blue-500 text-white"
-                    : "hover:bg-gray-200"
-                }`}
-              >
-                <span className="w-8 h-8 flex justify-center items-center">
-                  {iconMap[text]}
-                </span>
-                {/* Conditionally hide the text when the sidebar is collapsed */}
-                {open && <span className="ml-4 opacity-100">{text}</span>}
-              </button>
-            </li>
-          ))}
+          <li className="mb-4">
+            <button
+              onClick={handleDashboardClick}
+              className={`flex items-center ${
+                open ? "justify-start" : "justify-center"
+              } w-full text-left p-2 rounded ${
+                selectedTab === "Dashboard"
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-200"
+              }`}
+            >
+              <span className="w-8 h-8 flex justify-center items-center">
+                <MdDashboard size={20} />
+              </span>
+              {open && <span className="ml-4">Dashboard</span>}
+            </button>
+          </li>
+
+          <li className="mb-4">
+            <button
+              onClick={() => setSelectedTab("See Resume")}
+              className={`flex items-center ${
+                open ? "justify-start" : "justify-center"
+              } w-full text-left p-2 rounded ${
+                selectedTab === "See Resume"
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-200"
+              }`}
+            >
+              <span className="w-8 h-8 flex justify-center items-center">
+                <GrResume size={20} />
+              </span>
+              {open && <span className="ml-4">See Resume</span>}
+            </button>
+          </li>
+
+          <li className="mb-4">
+            <button
+              onClick={() => setSelectedTab("Change password")}
+              className={`flex items-center ${
+                open ? "justify-start" : "justify-center"
+              } w-full text-left p-2 rounded ${
+                selectedTab === "Change password"
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-200"
+              }`}
+            >
+              <span className="w-8 h-8 flex justify-center items-center">
+                <RiLockPasswordLine size={20} />
+              </span>
+              {open && <span className="ml-4">Change password</span>}
+            </button>
+          </li>
+
+          <li className="mb-4">
+            <button
+              onClick={() => setSelectedTab("About Us")}
+              className={`flex items-center ${
+                open ? "justify-start" : "justify-center"
+              } w-full text-left p-2 rounded ${
+                selectedTab === "About Us"
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-200"
+              }`}
+            >
+              <span className="w-8 h-8 flex justify-center items-center">
+                <TbArrowRoundaboutRight size={20} />
+              </span>
+              {open && <span className="ml-4">About Us</span>}
+            </button>
+          </li>
+
+          <li className="mb-4">
+            <button
+              onClick={() => setSelectedTab("Logout")}
+              className={`flex items-center ${
+                open ? "justify-start" : "justify-center"
+              } w-full text-left p-2 rounded ${
+                selectedTab === "Logout"
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-200"
+              }`}
+            >
+              <span className="w-8 h-8 flex justify-center items-center">
+                <RiLogoutBoxRLine size={20} />
+              </span>
+              {open && <span className="ml-4">Logout</span>}
+            </button>
+          </li>
         </ul>
       </aside>
 
       {/* Main content */}
-      <main className="p-0 bg-gray-100">
-        <header className="flex justify-between items-center h-[61px] w-full bg-white">
-          <div className="flex items-center justify-start h-[61px]">
-            <button
-              onClick={open ? handleDrawerClose : handleDrawerOpen}
-              className="text-gray-500 border-2 p-2 animation-scale-up rounded-sm"
-            >
-              {open ? (
-                <RiMenuFold3Line2 size={20} />
-              ) : (
-                <RiMenuFold4Line size={20} />
-              )}
-            </button>
-          </div>
-          <div className="flex items-center justify-between gap-5 mr-5 h-[61px]">
+      <main
+        className={`flex-grow p-0 bg-gray-100 transition-all duration-300 ${
+          open ? "ml-80" : "ml-20"
+        }`}
+      >
+        <header
+          className={`fixed top-0 left-0 right-0 z-40 flex justify-between items-center h-[61px] w-full bg-white transition-all duration-300 ${
+            open ? "pl-80" : "pl-20"
+          }`}
+        >
+          <button
+            onClick={handleDrawerToggle}
+            className="text-gray-500 border-2 p-2 rounded-sm"
+          >
+            {open ? (
+              <RiMenuFold3Line2 size={20} />
+            ) : (
+              <RiMenuFold4Line size={20} />
+            )}
+          </button>
+          <div className="flex items-center justify-between gap-5 mr-5">
             <AvatarImages />
             <SettingsMenu />
           </div>
         </header>
-
-        {/* Page content */}
-        <div className="p-10 pt-0">{renderContent()}</div>
+        <div className="p-10 pt-[61px]">{renderContent()}</div>
       </main>
     </div>
   );
