@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Menu, Transition } from "@headlessui/react"; // For menu dropdown
 import { FiSettings } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const SettingsMenu = () => {
   const [isRotating, setIsRotating] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setIsRotating(!isRotating);
   };
+
+  //handleDashboard 
+  const handleDashboard = () => {
+    navigate('/');
+  }
 
   return (
     <div className="relative">
@@ -38,21 +45,9 @@ const SettingsMenu = () => {
                     className={`${
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700"
                     } block px-4 py-2 text-sm w-full text-left hover:text-cyan-300`}
-                    onClick={handleClick}
+                    onClick={handleDashboard}
                   >
-                    Profile
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                    } block px-4 py-2 text-sm w-full text-left hover:text-cyan-300`}
-                    onClick={handleClick}
-                  >
-                    My Account
+                    Dashboard
                   </button>
                 )}
               </Menu.Item>

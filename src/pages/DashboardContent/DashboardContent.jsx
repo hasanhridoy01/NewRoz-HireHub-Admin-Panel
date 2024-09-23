@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./DashboardContent.css";
 import img from "../../assets/Images/myImg.8b24bcbabe5755aa8c7e.png";
 import Stepper from "awesome-react-stepper";
@@ -8,15 +8,14 @@ const DashboardContent = () => {
   const [isResumeUploaded, setIsResumeUploaded] = useState(false);
 
   const handleResumeUpload = () => {
-    // Logic for uploading the resume
-    setIsResumeUploaded(true);
+    setIsResumeUploaded(true); // Enable "Next" after resume upload
   };
 
   return (
     <div className="container">
       {isResumeUploaded ? (
         <div className="">
-          <PostResume />
+          <PostResume setIsResumeUploaded={setIsResumeUploaded} />
         </div>
       ) : (
         <div>
@@ -47,7 +46,7 @@ const DashboardContent = () => {
                 activeProgressBorder="2px solid #17253975"
                 submitBtn={<button className="stepperBtn">Submit</button>}
                 continueBtn={
-                  <button className="stepperBtn" disabled={!isResumeUploaded}>
+                  <button className="stepperBtn">
                     Next
                   </button>
                 }

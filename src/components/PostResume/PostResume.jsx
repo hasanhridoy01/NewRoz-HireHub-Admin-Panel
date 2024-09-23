@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./PostResume.css";
-import { Checkbox } from "@headlessui/react";
 
-const PostResume = () => {
+const PostResume = ({ setIsResumeUploaded }) => {
   const [educations, setEducations] = useState([{ id: Date.now() }]); // Default education div
   const [workExperiences, setWorkExperiences] = useState([{ id: Date.now() }]); // Default work div
   const [hideEnd, setHideEnd] = useState(false);
@@ -25,6 +24,11 @@ const PostResume = () => {
 
   const deleteWorkExperience = (id) => {
     setWorkExperiences(workExperiences.filter((work) => work.id !== id));
+  };
+
+  //handlePostResume
+  const handlePostResume = () => {
+    setIsResumeUploaded(false);  
   };
 
   return (
@@ -387,7 +391,11 @@ const PostResume = () => {
             ></textarea>
           </div>
           <div className="col-span-2">
-            <button className="ml-0 border-2 p-3 text-white bg-[#3E3E49] rounded-md">
+            <button
+              className="ml-0 border-2 p-3 text-white bg-[#3E3E49] rounded-md"
+              onClick={handlePostResume}
+              type="button"
+            >
               Submit
             </button>
           </div>

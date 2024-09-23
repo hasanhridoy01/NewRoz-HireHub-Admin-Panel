@@ -8,6 +8,9 @@ import { TbArrowRoundaboutRight } from "react-icons/tb";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { RiMenuFold3Line2, RiMenuFold4Line } from "react-icons/ri";
 import DashboardContent from "../DashboardContent/DashboardContent";
+import SeeResume from "../SeeResume/SeeResume";
+import ChangePassword from "../ChangePassword/ChangePassword";
+import About from "../About/About";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
@@ -26,13 +29,27 @@ const Dashboard = () => {
     handleNavigate();
   };
 
+  const handleResumeClick = () => {
+    setSelectedTab("See Resume");
+    setKey((prevKey) => prevKey + 1); // Update key to trigger re-render
+    handleNavigate();
+  };
+
+  const handleChangePasswordClick = () => {
+    setSelectedTab("Change Password");
+    setKey((prevKey) => prevKey + 1); // Update key to trigger re-render
+    handleNavigate();
+  };
+
   const renderContent = () => {
-    if (
-      ["Dashboard", "See Resume", "Change password", "About Us"].includes(
-        selectedTab
-      )
-    ) {
-      return <DashboardContent key={key} />; // Pass the key to force re-render
+    if (selectedTab === "Dashboard") {
+      return <DashboardContent key={key} />;
+    } else if (selectedTab === "See Resume") {
+      return <SeeResume key={key} />;
+    } else if (selectedTab === "Change Password") {
+      return <ChangePassword key={key} />;
+    } else if (selectedTab === "About Us") {
+      return <About key={key} />;
     }
     return <p>Select a tab</p>;
   };
@@ -72,7 +89,7 @@ const Dashboard = () => {
 
           <li className="mb-4">
             <button
-              onClick={() => setSelectedTab("See Resume")}
+              onClick={handleResumeClick}
               className={`flex items-center ${
                 open ? "justify-start" : "justify-center"
               } w-full text-left p-2 rounded ${
@@ -90,11 +107,11 @@ const Dashboard = () => {
 
           <li className="mb-4">
             <button
-              onClick={() => setSelectedTab("Change password")}
+              onClick={handleChangePasswordClick}
               className={`flex items-center ${
                 open ? "justify-start" : "justify-center"
               } w-full text-left p-2 rounded ${
-                selectedTab === "Change password"
+                selectedTab === "Change Password"
                   ? "bg-blue-500 text-white"
                   : "hover:bg-gray-200"
               }`}
@@ -102,7 +119,7 @@ const Dashboard = () => {
               <span className="w-8 h-8 flex justify-center items-center">
                 <RiLockPasswordLine size={20} />
               </span>
-              {open && <span className="ml-4">Change password</span>}
+              {open && <span className="ml-4">Change Password</span>}
             </button>
           </li>
 
@@ -121,24 +138,6 @@ const Dashboard = () => {
                 <TbArrowRoundaboutRight size={20} />
               </span>
               {open && <span className="ml-4">About Us</span>}
-            </button>
-          </li>
-
-          <li className="mb-4">
-            <button
-              onClick={() => setSelectedTab("Logout")}
-              className={`flex items-center ${
-                open ? "justify-start" : "justify-center"
-              } w-full text-left p-2 rounded ${
-                selectedTab === "Logout"
-                  ? "bg-blue-500 text-white"
-                  : "hover:bg-gray-200"
-              }`}
-            >
-              <span className="w-8 h-8 flex justify-center items-center">
-                <RiLogoutBoxRLine size={20} />
-              </span>
-              {open && <span className="ml-4">Logout</span>}
             </button>
           </li>
         </ul>
