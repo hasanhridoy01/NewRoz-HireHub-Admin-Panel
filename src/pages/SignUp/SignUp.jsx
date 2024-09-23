@@ -104,7 +104,7 @@ const SignUp = () => {
 
                 <p className="text-sm font-medium mt-2">
                   Do You Have an Account?{" "}
-                  <Link to="/SingIn" className="text-teal-500">
+                  <Link to="/SingIn" className="text-teal-500 hover:underline">
                     Login
                   </Link>
                 </p>
@@ -112,7 +112,7 @@ const SignUp = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-3 bg-teal-500 text-white rounded-lg shadow-md ${
+                  className={`w-full py-3 bg-teal-500 text-white rounded-lg shadow-md hover:bg-[crimson] hover:text-[white] ${
                     loading ? "opacity-70 cursor-not-allowed" : ""
                   } mt-4`}
                 >

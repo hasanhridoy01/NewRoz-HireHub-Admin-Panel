@@ -56,18 +56,18 @@ const SignIn = () => {
         className="flex items-center justify-center h-[410px] w-[800px] bg-cover bg-center shadow-xl"
         style={{ backgroundImage: `url(${img})` }}
       >
-        <div className="w-full h-full bg-transparent flex justify-between p-5">
+        <div className="w-full h-full bg-transparent flex justify-between items-center p-5">
           <div className="bg-transparent">
             <img className="w-full" src={login} alt="" />
           </div>
-          <div className="flex flex-col w-[300px] m-auto">
+          <div className="flex flex-col w-[390px] m-auto">
             <div className="space-y-4">
               {error ? (
                 <p className="text-center text-red-600 text-[15px] font-mono mt-3">
                   {error}
                 </p>
               ) : (
-                <h4 className="text-center text-[20px] font-mono mt-3">
+                <h4 className="text-center text-[20px] font-mono mt-3 animate-ping">
                   Login
                 </h4>
               )}
@@ -115,7 +115,7 @@ const SignIn = () => {
                   Are You New? Please{" "}
                   <Link
                     to="/SignUp"
-                    className="text-teal-500 text-[14px]"
+                    className="text-teal-500 text-[14px] hover:underline"
                   >
                     Registration
                   </Link>
@@ -125,7 +125,7 @@ const SignIn = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`p-2.5 bg-teal-500 text-white rounded-lg shadow-md ${
+                    className={`p-2.5 bg-teal-500 text-white rounded-lg shadow-md hover:bg-[crimson] hover:text-[white] ${
                       loading ? "cursor-not-allowed opacity-70" : ""
                     }`}
                   >
