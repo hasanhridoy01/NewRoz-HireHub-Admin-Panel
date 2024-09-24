@@ -4,6 +4,7 @@ import img from "../../assets/Images/authImages/authentication.png";
 import login from "../../assets/Images/authImages/signInImage.png";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,21 +27,54 @@ const SignUp = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
-    if (!name || !emailPattern.test(email) || !passwordPattern.test(password)) {
-      alert("Please check your input.");
+    if (!name) {
+      toast.error("Please fill out your name.", {
+        style: { backgroundColor: "crimson", color: "#fff" },
+      });
       setLoading(false);
       return;
     }
+
+    if (!emailPattern.test(email)) {
+      toast.error("Please enter a valid email address.", {
+        style: { backgroundColor: "crimson", color: "#fff" },
+      });
+      setLoading(false);
+      return;
+    }
+
+    if (!passwordPattern.test(password)) {
+      toast.error(
+        <div>
+          Password must:
+          <ul style={{ fontSize: "0.875rem", marginTop: "0.5rem" }}>
+            <li>Be at least 8 characters long</li>
+            <li>Include one uppercase letter</li>
+            <li>Include one lowercase letter</li>
+            <li>Include one number</li>
+          </ul>
+        </div>,
+        {
+          style: { backgroundColor: "crimson", color: "#fff" },
+        }
+      );
+      setLoading(false);
+      return;
+    }
+
+    // Continue with form submission or other logic
+    console.log({ name, email, password });
+    toast.success("User Create SuccessFully", {
+      style: { backgroundColor: "green", color: "#fff" }, // Tomato color background with white text
+    });
+    e.target.reset(); // Reset the form after successful submission
+    setLoading(false);
   };
 
   return (
     <div>
-      <div
-        className="bg-cover bg-center w-full h-screen flex items-center justify-center"
-      >
-        <div
-          className="w-[800px] h-[507px] flex items-center justify-center shadow bg-center bg-slate-300 rounded-lg"
-        > 
+      <div className="bg-cover bg-center w-full h-screen flex items-center justify-center">
+        <div className="w-[800px] h-[507px] flex items-center justify-center shadow bg-center bg-slate-300 rounded-lg">
           <div className="w-full h-full flex justify-between p-5 pr-0">
             <div className="flex flex-col w-[300px] m-auto">
               <h4 className="text-center text-[20px] font-mono mb-5">SignUp</h4>
@@ -102,7 +136,10 @@ const SignUp = () => {
 
                 <p className="text-sm font-medium mt-2">
                   Do You Have an Account?{" "}
-                  <Link to="/SingIn" className="text-teal-500 underline hover:text-[crimson]">
+                  <Link
+                    to="/SingIn"
+                    className="text-teal-500 underline hover:text-[crimson]"
+                  >
                     Login
                   </Link>
                 </p>

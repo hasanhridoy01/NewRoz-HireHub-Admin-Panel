@@ -5,6 +5,7 @@ import img from "../../assets/Images/authImages/authentication.png";
 import login from "../../assets/Images/authImages/signInImage.png";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   // Show password section
@@ -28,22 +29,33 @@ const SignIn = () => {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
     if (!email) {
-      alert("Please fill the email field");
+      toast.error("Please fill the email field");
       setLoading(false);
     } else if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address");
+      toast.error("Please enter a valid email address");
       setLoading(false);
     } else if (!password) {
-      alert("Please fill the password field");
+      toast.error("Please fill the password field");
       setLoading(false);
     } else if (!passwordPattern.test(password)) {
-      alert(
-        "Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, and one number"
+      toast.error(
+        <ul style={{ fontSize: "0.875rem", marginTop: "0.5rem" }}>
+          <li>Be at least 8 characters long</li>
+          <li>Include one uppercase letter</li>
+          <li>Include one lowercase letter</li>
+          <li>Include one number</li>
+        </ul>,
+        {
+          style: { backgroundColor: "crimson", color: "#fff" }, // Crimson background with white text
+        }
       );
+
       setLoading(false);
     } else {
       console.log(email, password);
-
+      toast.success("User SignIn SuccessFully", {
+        style: { backgroundColor: "green", color: "#fff" }, // Tomato color background with white text
+      });
       e.target.email.value = "";
       e.target.password.value = "";
       setLoading(false);
@@ -117,7 +129,7 @@ const SignIn = () => {
                     to="/forgetPassword"
                     className="text-gray-500 text-[14px] underline hover:text-[crimson]"
                   >
-                    Forget Password?
+                    Forgot Password?
                   </Link>
                 </p>
 

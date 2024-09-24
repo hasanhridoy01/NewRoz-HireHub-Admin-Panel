@@ -20,7 +20,7 @@ const ForgetPassword = () => {
           <div className="flex flex-col w-[390px] m-auto">
             <div className="space-y-4">
               <h4 className="text-left text-[20px] font-mono mt-2 flex items-center gap-2.5">
-              <FaArrowLeft onClick={handleBack} style={{ cursor: 'pointer' }} /> Forget Password
+              <FaArrowLeft onClick={handleBack} style={{ cursor: 'pointer' }} /> Forgot Password
               </h4>
               <Form>
                 <div className="flex flex-col mt-3">
