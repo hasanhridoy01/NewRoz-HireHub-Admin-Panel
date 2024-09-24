@@ -5,6 +5,7 @@ import login from "../../assets/Images/authImages/signInImage.png";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import toast from "react-hot-toast";
+import { MdOutlineAppRegistration } from "react-icons/md";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -77,7 +78,7 @@ const SignUp = () => {
         <div className="w-[800px] h-[507px] flex items-center justify-center shadow bg-center bg-slate-300 rounded-lg">
           <div className="w-full h-full flex justify-between p-5 pr-0">
             <div className="flex flex-col w-[300px] m-auto">
-              <h4 className="text-center text-[20px] font-mono mb-5">SignUp</h4>
+              <h4 className="text-[20px] font-mono mb-5 animate-bounce flex items-center justify-center gap-1"><MdOutlineAppRegistration size={22} /> SignUp</h4>
 
               {error && <p className="text-red-500 text-center">{error}</p>}
 
@@ -156,7 +157,7 @@ const SignUp = () => {
               </Form>
             </div>
             <div className="flex justify-center items-center mt-7">
-              <img className="h-[400px] w-[472px]" src={login} alt="" />
+              <img loading="lazy" className="h-[400px] w-[472px]" src={login} alt="" />
             </div>
           </div>
         </div>

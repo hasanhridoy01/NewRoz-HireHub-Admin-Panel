@@ -6,6 +6,7 @@ import login from "../../assets/Images/authImages/signInImage.png";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import toast from "react-hot-toast";
+import { MdLogin } from "react-icons/md";
 
 const SignIn = () => {
   // Show password section
@@ -64,10 +65,10 @@ const SignIn = () => {
 
   return (
     <div className="bg-cover bg-center w-full h-screen flex items-center justify-center">
-      <div className="flex items-center justify-center h-[410px] w-[800px] bg-slate-300 bg-center shadow rounded-lg">
+      <div className="flex items-center justify-center h-[416px] w-[800px] bg-slate-300 bg-center shadow rounded-lg">
         <div className="w-full h-full bg-transparent flex justify-between items-center p-5">
           <div className="bg-transparent">
-            <img className="h-96 w-[492px]" src={login} alt="" />
+            <img loading="lazy" className="h-96 w-[492px]" src={login} alt="" />
           </div>
           <div className="flex flex-col w-[390px] m-auto">
             <div className="space-y-4">
@@ -76,7 +77,8 @@ const SignIn = () => {
                   {error}
                 </p>
               ) : (
-                <h4 className="text-center text-[20px] font-mono mt-3 animate-bounce">
+                <h4 className="text-[20px] font-mono mt-3 animate-bounce flex items-center justify-center gap-1.5">
+                  <MdLogin size={22} />
                   Login
                 </h4>
               )}
