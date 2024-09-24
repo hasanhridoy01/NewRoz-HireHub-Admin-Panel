@@ -47,20 +47,24 @@ const SignIn = () => {
           <li>Include one number</li>
         </ul>,
         {
-          style: { backgroundColor: "crimson", color: "#fff" }, // Crimson background with white text
+          style: { backgroundColor: "crimson", color: "#fff" },
         }
       );
 
       setLoading(false);
     } else {
-      console.log(email, password);
-      
-      toast.success("User SignIn SuccessFully", {
-        style: { backgroundColor: "green", color: "#fff" }, // Tomato color background with white text
-      });
-      e.target.email.value = "";
-      e.target.password.value = "";
-      setLoading(false);
+      //Apply Try Catch...............!
+      try {
+        console.log(email, password);
+        toast.success("User SignIn SuccessFully", {
+          style: { backgroundColor: "green", color: "#fff" },
+        });
+        e.target.email.value = "";
+        e.target.password.value = "";
+        setLoading(false);
+      } catch (error) {
+        toast.error(error);
+      }
     }
   };
 
