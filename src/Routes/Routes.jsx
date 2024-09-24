@@ -3,6 +3,7 @@ import Main from "../layouts/Main/Main";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
+import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 
 export const route = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const route = createBrowserRouter([
       {
         path: '/SignUp',
         element: <SignUp />
+      },
+      {
+        path: '/forgetPassword',
+        element: <ForgetPassword />
       }
     ],
   },

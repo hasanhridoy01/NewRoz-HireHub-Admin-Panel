@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form, Link } from "react-router-dom";
 import img from "../../assets/Images/authImages/authentication.png";
-import login from "../../assets/Images/authImages/authentication2.png";
+import login from "../../assets/Images/authImages/signInImage.png";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 
@@ -37,13 +37,11 @@ const SignUp = () => {
     <div>
       <div
         className="bg-cover bg-center w-full h-screen flex items-center justify-center"
-        style={{ backgroundImage: `url(${img})` }}
       >
         <div
-          className="w-[800px] h-[522px] flex items-center justify-center shadow-md bg-cover bg-center"
-          style={{ backgroundImage: `url(${img})` }}
-        >
-          <div className="w-full h-full flex justify-between p-5">
+          className="w-[800px] h-[507px] flex items-center justify-center shadow bg-center bg-slate-300 rounded-lg"
+        > 
+          <div className="w-full h-full flex justify-between p-5 pr-0">
             <div className="flex flex-col w-[300px] m-auto">
               <h4 className="text-center text-[20px] font-mono mb-5">SignUp</h4>
 
@@ -104,7 +102,7 @@ const SignUp = () => {
 
                 <p className="text-sm font-medium mt-2">
                   Do You Have an Account?{" "}
-                  <Link to="/SingIn" className="text-teal-500 hover:underline">
+                  <Link to="/SingIn" className="text-teal-500 underline hover:text-[crimson]">
                     Login
                   </Link>
                 </p>
@@ -120,12 +118,8 @@ const SignUp = () => {
                 </button>
               </Form>
             </div>
-            <div className="flex justify-center items-center">
-              <img
-                src={login}
-                alt="login illustration"
-                className="h-[300px] w-[400px]"
-              />
+            <div className="flex justify-center items-center mt-7">
+              <img className="h-[400px] w-[472px]" src={login} alt="" />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import "./SignIn.css";
 import { useState } from "react";
 import { Form, Link, useLocation } from "react-router-dom";
 import img from "../../assets/Images/authImages/authentication.png";
-import login from "../../assets/Images/authImages/authentication2.png";
+import login from "../../assets/Images/authImages/signInImage.png";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 
@@ -42,23 +42,20 @@ const SignIn = () => {
       );
       setLoading(false);
     } else {
+      console.log(email, password);
+
       e.target.email.value = "";
       e.target.password.value = "";
+      setLoading(false);
     }
   };
 
   return (
-    <div
-      className="bg-cover bg-center w-full h-screen flex items-center justify-center"
-      style={{ backgroundImage: `url(${img})` }}
-    >
-      <div
-        className="flex items-center justify-center h-[410px] w-[800px] bg-cover bg-center shadow-xl"
-        style={{ backgroundImage: `url(${img})` }}
-      >
+    <div className="bg-cover bg-center w-full h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center h-[410px] w-[800px] bg-slate-300 bg-center shadow rounded-lg">
         <div className="w-full h-full bg-transparent flex justify-between items-center p-5">
           <div className="bg-transparent">
-            <img className="w-full" src={login} alt="" />
+            <img className="h-96 w-[492px]" src={login} alt="" />
           </div>
           <div className="flex flex-col w-[390px] m-auto">
             <div className="space-y-4">
@@ -67,7 +64,7 @@ const SignIn = () => {
                   {error}
                 </p>
               ) : (
-                <h4 className="text-center text-[20px] font-mono mt-3 animate-ping">
+                <h4 className="text-center text-[20px] font-mono mt-3 animate-bounce">
                   Login
                 </h4>
               )}
@@ -106,22 +103,35 @@ const SignIn = () => {
                       onClick={handleClickShowPassword}
                       className="absolute inset-y-0 right-0 flex items-center justify-center px-3 text-gray-600"
                     >
-                      {showPassword ? <MdVisibilityOff size={22} /> : <MdVisibility size={22} />}
+                      {showPassword ? (
+                        <MdVisibilityOff size={22} />
+                      ) : (
+                        <MdVisibility size={22} />
+                      )}
                     </button>
                   </div>
                 </div>
 
-                <p className="text-[13px] font-semibold mt-2">
+                <p className="text-[13px] font-semibold mt-2.5 text-right">
+                  <Link
+                    to="/forgetPassword"
+                    className="text-gray-500 text-[14px] underline hover:text-[crimson]"
+                  >
+                    Forget Password?
+                  </Link>
+                </p>
+
+                <p className="text-[13px] font-semibold mt-1.5">
                   Are You New? Please{" "}
                   <Link
                     to="/SignUp"
-                    className="text-teal-500 text-[14px] hover:underline"
+                    className="text-teal-500 text-[14px] underline hover:text-[crimson]"
                   >
                     Registration
                   </Link>
                 </p>
 
-                <div className="flex flex-col mt-6">
+                <div className="flex flex-col mt-3">
                   <button
                     type="submit"
                     disabled={loading}
