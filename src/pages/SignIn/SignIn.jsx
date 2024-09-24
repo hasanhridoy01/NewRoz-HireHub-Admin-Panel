@@ -54,6 +54,7 @@ const SignIn = () => {
       setLoading(false);
     } else {
       console.log(email, password);
+      
       toast.success("User SignIn SuccessFully", {
         style: { backgroundColor: "green", color: "#fff" }, // Tomato color background with white text
       });
