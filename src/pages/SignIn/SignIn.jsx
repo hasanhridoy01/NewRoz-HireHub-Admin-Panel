@@ -63,6 +63,7 @@ const SignIn = () => {
         e.target.password.value = "";
         setLoading(false);
       } catch (error) {
+        console.log(error);
         toast.error(error);
       }
     }
