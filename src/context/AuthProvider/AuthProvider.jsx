@@ -8,23 +8,25 @@ import toast from "react-hot-toast";
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true); // Set initial loading to true until check completes
   const queryClient = useQueryClient();
 
+  // Check if the JWT token exists in localStorage to determine if the user is logged in
   useEffect(() => {
-    // Check if the JWT token exists in localStorage to determine if the user is logged in
     const token = localStorage.getItem("Authorization");
     if (token) {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
     }
+    setLoading(false); // Stop loading once the check is complete
   }, []);
 
   // Mutation for logging in the user
   const mutation = useMutation({
     mutationFn: async (loginUser) => {
-      // Make the request using axios
+      setLoading(true); // Set loading to true when login starts
       const response = await axios.post(
         "http://localhost:8081/login",
         loginUser,
@@ -37,59 +39,52 @@ const AuthProvider = ({ children }) => {
       const token = response.headers["authorization"];
       if (token) {
         localStorage.setItem("Authorization", token);
-        setIsAuthenticated(true); 
-        console.log("Token stored:", token);
+        setIsAuthenticated(true);
       }
 
       return response;
     },
     onSuccess: (response) => {
       if (response.status === 200) {
-        // Invalidate relevant queries
         queryClient.invalidateQueries("login");
 
-        // Success message
         toast.success("User SignIn Successfully", {
           style: { backgroundColor: "green", color: "#fff" },
         });
 
-        // Redirect after successful login
-        window.location.href = "/";
+        window.location.href = "/"; // Redirect after successful login
       }
+      setLoading(false); // Stop loading when login succeeds
     },
     onError: (error) => {
-      // Handle login errors
       const errorMsg =
         error?.response?.data?.message || "Login failed. Please try again.";
       toast.error(errorMsg, {
         style: { backgroundColor: "crimson", color: "#fff" },
       });
+      setLoading(false); // Stop loading when login fails
     },
   });
 
   // Logout function
   const logout = () => {
-    // Remove JWT token from localStorage
     localStorage.removeItem("Authorization");
-    setIsAuthenticated(false); // Set user as not authenticated
-
-    // Optional: Invalidate any queries related to user data
+    setIsAuthenticated(false);
     queryClient.invalidateQueries("userData");
 
-    // Success message
     toast.success("Logged out successfully", {
       style: { backgroundColor: "green", color: "#fff" },
     });
 
-    // Redirect to the login page or homepage after logout
-    window.location.href = "/SingIn";
+    window.location.href = "/login"; // Redirect after logout
   };
 
   // Send value to context
   const contextInfo = {
     mutation,
-    logout, 
-    isAuthenticated, 
+    logout,
+    loading,
+    isAuthenticated,
   };
 
   return (
