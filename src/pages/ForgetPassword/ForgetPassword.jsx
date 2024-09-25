@@ -5,6 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import toast from "react-hot-toast";
 import "./ForgetPassword.css";
 import { TbPasswordMobilePhone } from "react-icons/tb";
+import { Helmet } from "react-helmet-async";
 
 const ForgetPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -44,6 +45,9 @@ const ForgetPassword = () => {
 
   return (
     <div className="bg-cover bg-center w-full h-screen flex items-center justify-center">
+      <Helmet>
+        <title>HireHub-ForGotPassword</title>
+      </Helmet>
       <div className="flex items-center justify-center h-[245px] w-[420px] bg-slate-300 bg-center shadow rounded-lg">
         <div className="w-full h-full bg-transparent flex justify-between items-center p-5">
           <div className="flex flex-col w-[390px] m-auto">

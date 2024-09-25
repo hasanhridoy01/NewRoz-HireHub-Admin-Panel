@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./SeeResume.css"; // Custom styles if needed
 import PostResume from "../../components/PostResume/PostResume";
+import { Helmet } from "react-helmet-async";
 
 const SeeResume = () => {
   const [postResumePage, setPostResumePage] = useState(false);
@@ -15,6 +16,9 @@ const SeeResume = () => {
         <PostResume />
       ) : (
         <div className="container">
+          <Helmet>
+            <title>HireHub-SeeResume</title>
+          </Helmet>
           <div className="flex py-10 px-4 h-screen">
             {/* Left Column: Contact and Social Media */}
             <div className="contact-col bg-[#3D3F42] text-white w-1/4 p-6 flex flex-col justify-between">

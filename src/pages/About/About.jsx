@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import "./About.css";
 
 const About = () => {
   return (
     <div className="container mx-auto py-10 px-4">
+      <Helmet>
+        <title>HireHub-AboutUs</title>
+      </Helmet>
       <h2 className="text-2xl font-bold text-left mb-2">About Newroz</h2>
       <p className="text-lg text-gray-700 mb-4">
         Newroz is a leading software development company specializing in

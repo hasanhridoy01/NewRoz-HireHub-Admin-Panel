@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { MdVisibility, MdVisibilityOff, MdLogin } from "react-icons/md";
 import login from "../../assets/Images/authImages/signInImage.png";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const SignIn = () => {
   const { mutation } = useContext(AuthContext); // Access the mutation from context
@@ -67,6 +68,9 @@ const SignIn = () => {
 
   return (
     <div className="bg-cover bg-center w-full h-screen flex items-center justify-center">
+      <Helmet>
+        <title>HireHub-SignIn</title>
+      </Helmet>
       <div className="flex items-center justify-center h-[416px] w-[800px] bg-slate-300 bg-center shadow rounded-lg">
         <div className="w-full h-full bg-transparent flex justify-between items-center p-5">
           <div className="bg-transparent">

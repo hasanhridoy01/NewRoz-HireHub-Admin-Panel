@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import "./ChangePassword.css";
 
 const ChangePassword = () => {
   return (
     <div className="h-screen overflow-hidden">
+      <Helmet>
+        <title>HireHub-ChangedPassword</title>
+      </Helmet>
       <form className="w-full mt-10 h-screen overflow-hidden">
         <h4 className="border-b-2 pb-2 text-2xl text-center">
           Change Password

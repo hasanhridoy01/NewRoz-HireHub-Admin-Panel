@@ -11,6 +11,7 @@ import DashboardContent from "../DashboardContent/DashboardContent";
 import SeeResume from "../SeeResume/SeeResume";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import About from "../About/About";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
@@ -56,6 +57,9 @@ const Dashboard = () => {
 
   return (
     <div className="flex">
+      <Helmet>
+        <title>HireHub-Dashboard</title>
+      </Helmet>
       {/* Sidebar */}
       <aside
         className={`bg-white transition-all duration-300 ${
