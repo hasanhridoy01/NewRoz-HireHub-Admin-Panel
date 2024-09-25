@@ -1,42 +1,45 @@
-import "./SignIn.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Form, Link, useLocation } from "react-router-dom";
-import img from "../../assets/Images/authImages/authentication.png";
-import login from "../../assets/Images/authImages/signInImage.png";
-import { MdVisibility } from "react-icons/md";
-import { MdVisibilityOff } from "react-icons/md";
 import toast from "react-hot-toast";
-import { MdLogin } from "react-icons/md";
+import { MdVisibility, MdVisibilityOff, MdLogin } from "react-icons/md";
+import login from "../../assets/Images/authImages/signInImage.png";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const SignIn = () => {
-  // Show password section
+  const { mutation } = useContext(AuthContext); // Access the mutation from context
   const [showPassword, setShowPassword] = useState(false);
-  const location = useLocation();
-  const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    // Validation logic for email and password
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
     if (!email) {
-      toast.error("Please fill the email field");
+      toast.error("Please fill the email field", {
+        style: { backgroundColor: "crimson", color: "#fff" },
+      });
       setLoading(false);
     } else if (!emailPattern.test(email)) {
-      toast.error("Please enter a valid email address");
+      toast.error("Please enter a valid email address", {
+        style: { backgroundColor: "crimson", color: "#fff" },
+      });
       setLoading(false);
     } else if (!password) {
-      toast.error("Please fill the password field");
+      toast.error("Please fill the password field", {
+        style: { backgroundColor: "crimson", color: "#fff" },
+      });
       setLoading(false);
     } else if (!passwordPattern.test(password)) {
       toast.error(
@@ -46,25 +49,18 @@ const SignIn = () => {
           <li>Include one lowercase letter</li>
           <li>Include one number</li>
         </ul>,
-        {
-          style: { backgroundColor: "crimson", color: "#fff" },
-        }
+        { style: { backgroundColor: "crimson", color: "#fff" } }
       );
-
       setLoading(false);
     } else {
-      //Apply Try Catch...............!
       try {
-        console.log(email, password);
-        toast.success("User SignIn SuccessFully", {
-          style: { backgroundColor: "green", color: "#fff" },
-        });
+        await mutation.mutateAsync({ email, password });
         e.target.email.value = "";
         e.target.password.value = "";
-        setLoading(false);
       } catch (error) {
-        console.log(error);
-        toast.error(error);
+        console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -74,13 +70,20 @@ const SignIn = () => {
       <div className="flex items-center justify-center h-[416px] w-[800px] bg-slate-300 bg-center shadow rounded-lg">
         <div className="w-full h-full bg-transparent flex justify-between items-center p-5">
           <div className="bg-transparent">
-            <img loading="lazy" className="h-96 w-[492px]" src={login} alt="" />
+            <img
+              loading="lazy"
+              className="h-96 w-[492px]"
+              src={login}
+              alt="Login Image"
+            />
           </div>
           <div className="flex flex-col w-[390px] m-auto">
             <div className="space-y-4">
-              {error ? (
+              {/* Error Handling Display */}
+              {mutation.isError ? (
                 <p className="text-center text-red-600 text-[15px] font-mono mt-3">
-                  {error}
+                  {mutation.error?.response?.data?.message ||
+                    "An error occurred"}
                 </p>
               ) : (
                 <h4 className="text-[20px] font-mono mt-3 animate-bounce flex items-center justify-center gap-1.5">
@@ -88,7 +91,6 @@ const SignIn = () => {
                   Login
                 </h4>
               )}
-
               <Form onSubmit={handleFormSubmit}>
                 <div className="flex flex-col mt-5">
                   <label htmlFor="email" className="text-[17px] font-sans mb-1">
@@ -160,7 +162,26 @@ const SignIn = () => {
                     }`}
                   >
                     {loading ? (
-                      <span className="spinner-border text-white h-5 w-5 inline-block"></span>
+                      <svg
+                        className="animate-spin h-5 w-5 text-white inline-block"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8h8c0 4.418-3.582 8-8 8a8 8 0 01-8-8z"
+                        ></path>
+                      </svg>
                     ) : (
                       "Login"
                     )}
