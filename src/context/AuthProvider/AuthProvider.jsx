@@ -9,7 +9,7 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true); // Set initial loading to true until check completes
+  const [loading, setLoading] = useState(true); 
   const queryClient = useQueryClient();
 
   // Check if the JWT token exists in localStorage to determine if the user is logged in
@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
   // Mutation for logging in the user
   const mutation = useMutation({
     mutationFn: async (loginUser) => {
-      setLoading(true); // Set loading to true when login starts
+      setLoading(true); 
       const response = await axios.post(
         "http://localhost:8081/login",
         loginUser,
@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
 
         window.location.href = "/"; // Redirect after successful login
       }
-      setLoading(false); // Stop loading when login succeeds
+      setLoading(false);
     },
     onError: (error) => {
       const errorMsg =
@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
       toast.error(errorMsg, {
         style: { backgroundColor: "crimson", color: "#fff" },
       });
-      setLoading(false); // Stop loading when login fails
+      setLoading(false);
     },
   });
 
