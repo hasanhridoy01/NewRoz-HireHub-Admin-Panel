@@ -21,7 +21,7 @@ const ForgetPassword = () => {
     e.preventDefault();
 
     const email = e.target.email.value;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email regex for validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
 
     setLoading(true);
 
