@@ -85,7 +85,7 @@ const SignIn = () => {
             <div className="space-y-4">
               {/* Error Handling Display */}
               {mutation.isError ? (
-                <p className="text-center text-red-600 text-[15px] font-mono mt-3">
+                <p className="text-center text-red-600 text-[15px] font-extralight mt-3">
                   {mutation.error?.response?.data?.message ||
                     "An error occurred"}
                 </p>
