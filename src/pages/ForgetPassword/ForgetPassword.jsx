@@ -57,7 +57,7 @@ const ForgetPassword = () => {
                   onClick={handleBack}
                   style={{ cursor: "pointer" }}
                 />{" "}
-                <span className="flex items-center justify-center gap-1.5 animate-bounce">
+                <span className="flex items-center justify-center gap-1.5">
                   <TbPasswordMobilePhone /> Forgot Password
                 </span>
               </h4>
