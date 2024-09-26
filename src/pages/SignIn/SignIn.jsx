@@ -85,7 +85,7 @@ const SignIn = () => {
             <div className="space-y-4">
               {/* Error Handling Display */}
               {mutation.isError ? (
-                <p className="text-center text-red-600 text-[15px] font-extralight mt-3">
+                <p className="text-center text-red-600 text-[15px] font-serif mt-3">
                   {mutation.error?.response?.data?.message ||
                     "An error occurred"}
                 </p>
@@ -176,9 +176,8 @@ const SignIn = () => {
                           className="opacity-25"
                           cx="12"
                           cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
+                          r="2" 
+                          fill="currentColor" 
                         ></circle>
                         <path
                           className="opacity-75"
