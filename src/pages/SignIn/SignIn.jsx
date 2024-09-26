@@ -90,7 +90,7 @@ const SignIn = () => {
                     "An error occurred"}
                 </p>
               ) : (
-                <h4 className="text-[20px] font-mono mt-3 animate-bounce flex items-center justify-center gap-1.5">
+                <h4 className="text-[20px] font-mono mt-3 flex items-center justify-center gap-1.5">
                   <MdLogin size={22} />
                   Login
                 </h4>
