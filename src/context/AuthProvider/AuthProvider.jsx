@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     } else {
       setIsAuthenticated(false);
     }
-    setLoading(false); // Stop loading once the check is complete
+    setLoading(false); 
   }, []);
 
   // Mutation for logging in the user
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
           style: { backgroundColor: "green", color: "#fff" },
         });
 
-        window.location.href = "/"; // Redirect after successful login
+        window.location.href = "/"; 
       }
       setLoading(false);
     },
@@ -76,7 +76,7 @@ const AuthProvider = ({ children }) => {
       style: { backgroundColor: "green", color: "#fff" },
     });
 
-    window.location.href = "/login"; // Redirect after logout
+    window.location.href = "/login"; 
   };
 
   // Send value to context
