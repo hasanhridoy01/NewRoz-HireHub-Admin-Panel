@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Form, Link, useLocation } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { MdVisibility, MdVisibilityOff, MdLogin } from "react-icons/md";
 import login from "../../assets/Images/authImages/signInImage.png";
@@ -10,7 +10,6 @@ const SignIn = () => {
   const { mutation } = useContext(AuthContext); // Access the mutation from context
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -176,8 +175,8 @@ const SignIn = () => {
                           className="opacity-25"
                           cx="12"
                           cy="12"
-                          r="2" 
-                          fill="currentColor" 
+                          r="2"
+                          fill="currentColor"
                         ></circle>
                         <path
                           className="opacity-75"
